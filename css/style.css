@@ -1,0 +1,82 @@
+body {
+    font-family: 'Inter', sans-serif;
+    background: #121212;
+    color: #eaeaea;
+    margin: 0;
+}
+
+header {
+    text-align: center;
+    padding: 60px 20px;
+}
+
+nav {
+    text-align: center;
+    border-top: 1px solid #333;
+    border-bottom: 1px solid #333;
+    padding: 10px;
+}
+
+nav a {
+    color: #ccc;
+    margin: 0 15px;
+    text-decoration: none;
+}
+
+nav a:hover {
+    color: #fff;
+}
+
+.card {
+    background: #1c1c1c;
+    margin: 40px auto;
+    padding: 30px;
+    width: 70%;
+    border-radius: 10px;
+}
+.typing {
+  text-align: center;
+  font-size: 1.2rem;
+  color: #8b949e;
+}
+
+#typed {
+  color: #58a6ff;
+}
+
+.code {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.9rem;
+  color: #8b949e;
+}
+:root {
+  --bg: #0f1117;
+  --card: #161b22;
+  --text: #e6edf3;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+}
+
+.card {
+  background: var(--card);
+}
+
+/* Light mode */
+.light {
+  --bg: #ffffff;
+  --card: #f2f2f2;
+  --text: #111111;
+}
+
+#theme-toggle {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  background: none;
+  border: none;
+  font-size: 1.3rem;
+  cursor: pointer;
+}
