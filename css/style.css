@@ -1,67 +1,16 @@
-body {
-    font-family: 'Inter', sans-serif;
-    background: #121212;
-    color: #eaeaea;
-    margin: 0;
-}
-
-header {
-    text-align: center;
-    padding: 60px 20px;
-}
-
-nav {
-    text-align: center;
-    border-top: 1px solid #333;
-    border-bottom: 1px solid #333;
-    padding: 10px;
-}
-
-nav a {
-    color: #ccc;
-    margin: 0 15px;
-    text-decoration: none;
-}
-
-nav a:hover {
-    color: #fff;
-}
-
-.card {
-    background: #1c1c1c;
-    margin: 40px auto;
-    padding: 30px;
-    width: 70%;
-    border-radius: 10px;
-}
-.typing {
-  text-align: center;
-  font-size: 1.2rem;
-  color: #8b949e;
-}
-
-#typed {
-  color: #58a6ff;
-}
-
-.code {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.9rem;
-  color: #8b949e;
-}
+/* ===============================
+   GLOBAL VARIABLES & THEME
+================================ */
 :root {
   --bg: #0f1117;
   --card: #161b22;
   --text: #e6edf3;
-}
-
-body {
-  background: var(--bg);
-  color: var(--text);
-}
-
-.card {
-  background: var(--card);
+  --muted: #8b949e;
+  --accent: #58a6ff;
+  --border: #30363d;
+  --radius: 12px;
+  --max-width: 1100px;
+  --transition: all 0.25s ease;
 }
 
 /* Light mode */
@@ -69,8 +18,185 @@ body {
   --bg: #ffffff;
   --card: #f2f2f2;
   --text: #111111;
+  --muted: #555555;
+  --border: #dddddd;
 }
 
+/* ===============================
+   BASE STYLES
+================================ */
+body {
+  font-family: Georgia, serif;
+  background: var(--bg);
+  color: var(--text);
+  margin: 0;
+  line-height: 1.65;
+}
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* ===============================
+   HEADER / HERO
+================================ */
+header {
+  text-align: center;
+  padding: 80px 20px 50px;
+}
+
+header h1 {
+  font-size: 2.6rem;
+  margin-bottom: 10px;
+}
+
+header .subtitle {
+  font-size: 1.1rem;
+  color: var(--muted);
+}
+
+/* ===============================
+   NAVIGATION
+================================ */
+nav {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: var(--bg);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  padding: 12px;
+  text-align: center;
+}
+
+nav a {
+  color: var(--muted);
+  margin: 0 15px;
+  font-size: 0.95rem;
+  transition: var(--transition);
+}
+
+nav a:hover,
+nav a.active {
+  color: var(--text);
+  border-bottom: 2px solid var(--accent);
+}
+
+/* ===============================
+   MAIN LAYOUT
+================================ */
+main {
+  max-width: var(--max-width);
+  margin: auto;
+  padding: 40px 20px;
+}
+
+/* ===============================
+   CARD SYSTEM
+================================ */
+.card {
+  background: var(--card);
+  padding: 32px;
+  border-radius: var(--radius);
+  margin-bottom: 40px;
+  border: 1px solid var(--border);
+  transition: var(--transition);
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+}
+
+/* Featured / important card */
+.card-primary {
+  border-left: 5px solid var(--accent);
+}
+
+/* Muted / secondary card */
+.card-muted {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+/* ===============================
+   SECTION HEADERS
+================================ */
+.section-title {
+  font-size: 1.4rem;
+  margin-bottom: 15px;
+  border-left: 4px solid var(--accent);
+  padding-left: 12px;
+}
+
+/* ===============================
+   META TEXT (ACADEMIC FEEL)
+================================ */
+.meta {
+  font-size: 0.85rem;
+  color: var(--muted);
+  margin-bottom: 10px;
+}
+
+/* ===============================
+   TYPING ANIMATION AREA
+================================ */
+.typing {
+  text-align: center;
+  font-size: 1.2rem;
+  margin-top: 20px;
+  color: var(--muted);
+}
+
+#typed {
+  color: var(--accent);
+}
+
+/* ===============================
+   SKILL TAGS / CLUSTERS
+================================ */
+.tags {
+  margin-top: 10px;
+}
+
+.tag {
+  display: inline-block;
+  font-size: 0.8rem;
+  padding: 6px 10px;
+  margin: 4px;
+  border-radius: 20px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  color: var(--muted);
+}
+
+/* ===============================
+   CODE / TECH TEXT
+================================ */
+.code {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+
+/* ===============================
+   FOOTER
+================================ */
+footer {
+  text-align: center;
+  padding: 40px 20px;
+  font-size: 0.85rem;
+  color: var(--muted);
+  border-top: 1px solid var(--border);
+}
+
+/* ===============================
+   THEME TOGGLE
+================================ */
 #theme-toggle {
   position: absolute;
   top: 20px;
