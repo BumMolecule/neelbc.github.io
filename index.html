@@ -1,120 +1,84 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Neeloy Bhattacharya</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Neeloy Bhattacharya</title>
 
-    <!-- CSS -->
-    <!--
-    <link rel="stylesheet" href="css/style.css">
-    --->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    
-    <!-- Fonts -->
-    <!--
-    <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
-    --->
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&family=Source+Serif+4:wght@400;500&display=swap" rel="stylesheet">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&family=Source+Serif+4:wght@400;500&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome -->
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+  />
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="css/style.css" />
 </head>
 
-<script>
-    const words = [
-      { text: "Data Science", class: "word-ds" },
-      { text: "Cheminformatics", class: "word-chem" },
-      { text: "Machine Learning", class: "word-ml" },
-      { text: "Manchester United", class: "word-mu" },
-      { text: "Quizzing", class: "word-quiz" }
-    ];
-
-    let i = 0;
-    const el = document.getElementById("typed");
-
-    function showWord() {
-      el.className = "";
-      void el.offsetWidth; // force reflow
-      el.className.add(words[i].class);
-      el.textContent = words[i].text;
-      el.style.opacity = 1;
-
-      setTimeout(() => {
-        el.style.opacity = 0;
-        i = (i + 1) % words.length;
-        setTimeout(showWord, 600);
-      }, 1800);
-    }
-</script>
-    
 <body>
-    <header>
-        <h1>Neeloy Bhattacharya</h1>
 
-        <div class="social-bar">
-          <a href="https://github.com/BumMolecule" target="_blank">
-            <i class="fa-brands fa-github"></i>
-          </a>
+<header>
+  <h1>Neeloy Bhattacharya</h1>
 
-          <a href="mailto:neeloyofficial@gmail.com">
-            <i class="fa-solid fa-envelope"></i>
-          </a>
+  <!-- Digital Clock -->
+  <div id="clock"></div>
 
-          <a href="https://x.com/neeluspeaks" target="_blank">
-            <i class="fa-brands fa-x-twitter"></i>
-          </a>
+  <!-- Social Icons -->
+  <div class="social-bar">
+    <a href="https://github.com/BumMolecule" target="_blank" aria-label="GitHub">
+      <i class="fa-brands fa-github"></i>
+    </a>
+    <a href="mailto:neeloyofficial@gmail.com" aria-label="Email">
+      <i class="fa-solid fa-envelope"></i>
+    </a>
+    <a href="https://x.com/neeluspeaks" target="_blank" aria-label="Twitter">
+      <i class="fa-brands fa-twitter-square"></i>
+    </a>
+    <a href="https://linkedin.com/in/neeloy-bhattacharya-here" target="_blank" aria-label="LinkedIn">
+      <i class="fa-brands fa-linkedin-square"></i>
+    </a>
+    <a href="https://boxd.it/8rmYf" target="_blank" aria-label="Letterboxd">
+      🎬
+    </a>
+    <a href="https://app.thestorygraph.com/profile/neeluism" target="_blank" aria-label="StoryGraph">
+      📚
+    </a>
+  </div>
 
-          <a href="https://linkedin.com/in/neeloy-bhattacharya-here" target="_blank">
-            <i class="fa-brands fa-linkedin"></i>
-          </a>
+  <!-- Typing Line -->
+  <p class="typing">
+    I love <span id="typed" class="word-ds">Data Science</span>
+  </p>
 
-          <a href="https://boxd.it/8rmYf" target="_blank">🎬</a>
-          <a href="https://app.thestorygraph.com/profile/neeluism" target="_blank">📚</a>
-        </div>
+  <!-- Theme Toggle -->
+  <button id="theme-toggle">💡</button>
+</header>
 
+<nav>
+  <a href="index.html">Home</a>
+  <a href="blogs.html">Blogs</a>
+  <a href="#">Buzzing</a>
+</nav>
 
-        <p class="typing">
-            I love <span id="typed" class="word-ds">Data Science</span>
-        </p>
-        <button id="theme-toggle">💡</button>
-    </header>
+<main>
+  <section class="card">
+    <h2>About Me</h2>
+    <p>
+      A curious mind exploring ML-augmented applications in Computational Biophysics, Data Science and beyond.
+    </p>
+  </section>
+</main>
 
-    <nav>
-        <a href="index.html">Home</a>
-        <a href="blogs.html">Blogs</a>
-        <a href="buzzing.html">Buzzing</a>
-    </nav>
+<footer>
+  <p>The Truth Is Out There · © 2026</p>
+</footer>
 
-    <section class="card">
-        <h2>About Me</h2>
-        <p>
-            I am interested in cheminformatics, AI-driven molecular modeling,
-            and computational science.
-        </p>
-    </section>
-
-    <script src="js/main.js"></script>
-    <footer>
-        <span class="footer-quote">The Truth Is Out There</span> · © 2026
-    </footer>
-    
-    <script>
-    function updateClock() {
-      const now = new Date();
-      const options = {
-        timeZone: 'Asia/Kolkata',
-        weekday: 'short',
-        year: 'numeric',
-        month: 'short',
-        day: 'numeric',
-        hour: '2-digit',
-        minute: '2-digit',
-        second: '2-digit'
-      };
-      document.getElementById('clock').textContent =
-        now.toLocaleString('en-IN', options) + ' IST';
-    }
-    setInterval(updateClock, 1000);
-    updateClock();
-    </script>
-        
+<!-- JS -->
+<script src="js/main.js"></script>
 </body>
 </html>
+
 
