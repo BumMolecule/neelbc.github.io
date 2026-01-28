@@ -71,6 +71,23 @@ header .subtitle {
   font-weight: 500;
 }
 
+.typing {
+  font-size: 1.25rem;
+  margin-top: 10px;
+  min-height: 1.5em; /* prevents layout jump */
+}
+
+
+header h1 {
+  font-family: 'Playfair Display', serif;
+  letter-spacing: 0.5px;
+}
+
+header .subtitle {
+  font-family: 'Source Serif 4', serif;
+}
+
+
 /* ===============================
    NAVIGATION
 ================================ */
@@ -230,5 +247,43 @@ footer {
   50% {
     text-shadow: 0 0 10px rgba(88, 166, 255, 0.7);
   }
+}
+
+.social-bar {
+  position: fixed;
+  left: 18px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  z-index: 999;
+}
+
+.social-bar .icon {
+  font-size: 1.3rem;
+  color: #8b949e;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, color 0.3s;
+}
+
+.social-bar .icon:hover {
+  transform: scale(1.25);
+}
+
+.icon.github:hover { color: #58a6ff; box-shadow: 0 0 12px #58a6ff; }
+.icon.mail:hover { color: #f2cc60; box-shadow: 0 0 12px #f2cc60; }
+.icon.twitter:hover { color: #1da1f2; box-shadow: 0 0 12px #1da1f2; }
+.icon.linkedin:hover { color: #0a66c2; box-shadow: 0 0 12px #0a66c2; }
+.icon.letterboxd:hover { color: #00e054; box-shadow: 0 0 12px #00e054; }
+.icon.storygraph:hover { color: #a371f7; box-shadow: 0 0 12px #a371f7; }
+
+#clock {
+  position: fixed;
+  top: 18px;
+  left: 18px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.85rem;
+  color: #8b949e;
+  opacity: 0.8;
 }
 
