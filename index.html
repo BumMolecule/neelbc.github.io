@@ -17,45 +17,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&family=Source+Serif+4:wght@400;500&display=swap" rel="stylesheet">
 </head>
 
-<body>
-    <header>
-        <h1>Neeloy Bhattacharya</h1>
-        <div id="clock"></div>
-        <div class="social-bar">
-          <a href="https://github.com/BumMolecule" target="_blank"><i class="fa-brands fa-github"></i></a>
-          <a href="mailto:neeloyofficial@gmail.com"><i class="fa-solid fa-envelope"><\i></a>
-          <a href="https://x.com/neeluspeaks" target="_blank"><i class="fa fa-twitter-square" aria-hidden="true"><\i></a>
-          <a href="https://linkedin.com/in/neeloy-bhattacharya-here" target="_blank" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-square"></i></a>
-          <a href="https://boxd.it/8rmYf" target="_blank" class="icon letterboxd">🎬</a>
-          <a href="https://app.thestorygraph.com/profile/neeluism" target="_blank" class="icon storygraph">📚</a>
-        </div>
-
-        <p class="typing">
-            I love <span id="typed"></span>
-        </p>
-        <button id="theme-toggle">💡</button>
-    </header>
-
-    <nav>
-        <a href="index.html">Home</a>
-        <a href="blogs.html">Blogs</a>
-        <a href="buzzing.html">Buzzing</a>
-    </nav>
-
-    <section class="card">
-        <h2>About Me</h2>
-        <p>
-            I am interested in cheminformatics, AI-driven molecular modeling,
-            and computational science.
-        </p>
-    </section>
-
-    <script src="js/main.js"></script>
-    <footer>
-        <span class="footer-quote">The Truth Is Out There</span> · © 2026
-    </footer>
-    
-    <script>
+<script>
     const words = [
       { text: "Data Science", class: "word-ds" },
       { text: "Cheminformatics", class: "word-chem" },
@@ -80,9 +42,58 @@
         setTimeout(showWord, 600);
       }, 1800);
     }
+</script>
+    
+<body>
+    <header>
+        <h1>Neeloy Bhattacharya</h1>
 
-    showWord();
-    </script>
+        <div class="social-bar">
+          <a href="https://github.com/BumMolecule" target="_blank">
+            <i class="fa-brands fa-github"></i>
+          </a>
+
+          <a href="mailto:neeloyofficial@gmail.com">
+            <i class="fa-solid fa-envelope"></i>
+          </a>
+
+          <a href="https://x.com/neeluspeaks" target="_blank">
+            <i class="fa-brands fa-x-twitter"></i>
+          </a>
+
+          <a href="https://linkedin.com/in/neeloy-bhattacharya-here" target="_blank">
+            <i class="fa-brands fa-linkedin"></i>
+          </a>
+
+          <a href="https://boxd.it/8rmYf" target="_blank">🎬</a>
+          <a href="https://app.thestorygraph.com/profile/neeluism" target="_blank">📚</a>
+        </div>
+
+
+        <p class="typing">
+            I love <span id="typed" class="word-ds">Data Science</span>
+        </p>
+        <button id="theme-toggle">💡</button>
+    </header>
+
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="blogs.html">Blogs</a>
+        <a href="buzzing.html">Buzzing</a>
+    </nav>
+
+    <section class="card">
+        <h2>About Me</h2>
+        <p>
+            I am interested in cheminformatics, AI-driven molecular modeling,
+            and computational science.
+        </p>
+    </section>
+
+    <script src="js/main.js"></script>
+    <footer>
+        <span class="footer-quote">The Truth Is Out There</span> · © 2026
+    </footer>
     
     <script>
     function updateClock() {
