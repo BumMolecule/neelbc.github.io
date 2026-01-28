@@ -39,6 +39,32 @@
     <footer>
         <span class="footer-quote">The Truth Is Out There</span> · © 2026
     </footer>
+    <script>
+    const words = [
+      { text: "Data Science", class: "word-ds" },
+      { text: "Cheminformatics", class: "word-chem" },
+      { text: "Machine Learning", class: "word-ml" },
+      { text: "Manchester United", class: "word-mu" },
+      { text: "Quizzing", class: "word-quiz" }
+    ];
+
+    let i = 0;
+    const el = document.getElementById("typed");
+
+    function showWord() {
+      el.className = words[i].class;
+      el.textContent = words[i].text;
+      el.style.opacity = 1;
+
+      setTimeout(() => {
+        el.style.opacity = 0;
+        i = (i + 1) % words.length;
+        setTimeout(showWord, 600);
+      }, 1800);
+    }
+
+    showWord();
+    </script>
 </body>
 </html>
 
