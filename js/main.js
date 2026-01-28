@@ -1,36 +1,47 @@
-console.log("Website loaded");
-const texts = [
-  "data science",
-  "machine learning",
-  "cheminformatics",
-  "scientific modeling",
-  "AI-driven discovery"
+/* ===== IST CLOCK ===== */
+function updateClock() {
+  const now = new Date();
+  const options = {
+    timeZone: "Asia/Kolkata",
+    hour: "2-digit",
+    minute: "2-digit",
+    second: "2-digit",
+    weekday: "short",
+    year: "numeric",
+    month: "short",
+    day: "numeric"
+  };
+  document.getElementById("clock").textContent =
+    now.toLocaleString("en-IN", options);
+}
+setInterval(updateClock, 1000);
+updateClock();
+
+/* ===== TYPING WORD ROTATION ===== */
+const words = [
+  { text: "Data Science", class: "word-ds" },
+  { text: "Cheminformatics", class: "word-chem" },
+  { text: "Machine Learning", class: "word-ml" },
+  { text: "Manchester United", class: "word-mu" },
+  { text: "Quizzing", class: "word-quiz" }
 ];
 
-let count = 0;
 let index = 0;
+const typed = document.getElementById("typed");
 
-(function type() {
-  if (count === texts.length) count = 0;
+setInterval(() => {
+  typed.style.opacity = 0;
 
-  let currentText = texts[count];
-  let letter = currentText.slice(0, ++index);
+  setTimeout(() => {
+    index = (index + 1) % words.length;
+    typed.textContent = words[index].text;
+    typed.className = words[index].class;
+    typed.style.opacity = 1;
+  }, 500);
+}, 2500);
 
-  document.getElementById("typed").textContent = letter;
-
-  if (letter.length === currentText.length) {
-    setTimeout(() => {
-      index = 0;
-      count++;
-    }, 1500);
-  }
-
-  setTimeout(type, 100);
-})();
-const toggle = document.getElementById("theme-toggle");
-
-toggle.onclick = () => {
+/* ===== THEME TOGGLE (future-ready) ===== */
+document.getElementById("theme-toggle").addEventListener("click", () => {
   document.body.classList.toggle("light");
-  toggle.textContent =
-    document.body.classList.contains("light") ? "💡" : "🌙";
-};
+});
+
