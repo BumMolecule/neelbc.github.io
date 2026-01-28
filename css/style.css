@@ -60,6 +60,17 @@ header .subtitle {
   color: var(--muted);
 }
 
+.word-ds { color: #58a6ff; }        /* coral blue */
+.word-chem { color: #f2cc60; }      /* bright yellow */
+.word-ml { color: #3fb950; }        /* green */
+.word-mu { color: #f85149; }        /* red */
+.word-quiz { color: #a371f7; }      /* purple */
+
+#typed {
+  transition: opacity 0.5s ease;
+  font-weight: 500;
+}
+
 /* ===============================
    NAVIGATION
 ================================ */
