@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Blogs & Resources · Neeloy Bhattacharya</title>
+
+  <!-- Same fonts as index.html -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;1,500&family=Source+Serif+4:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
+  <!-- Link your existing stylesheet -->
+  <link rel="stylesheet" href="css/style.css" />
+
+  <style>
+    /* ─── CSS Variables ─── */
+    :root {
+      --accent-tech:   #2ec4b6;
+      --accent-notion: #7c3aed;   /* deeper violet — readable on both modes */
+      --accent-phil:   #b8860b;   /* darker gold — readable on light */
+      --accent-tech-bg:   rgba(46, 196, 182, 0.08);
+      --accent-notion-bg: rgba(124, 58, 237, 0.07);
+      --accent-phil-bg:   rgba(184, 134, 11, 0.07);
+
+      /* Light mode card colours */
+      --card-bg:       #ffffff;
+      --card-border:   #e5e7eb;
+      --card-text:     #1a1a2e;
+      --card-subtext:  #4b5563;
+      --card-tag-bg:   rgba(46, 196, 182, 0.12);
+
+      --border-radius: 10px;
+      --card-pad: 1.2rem 1.4rem;
+      --transition: 0.22s ease;
+    }
+
+    /* ─── Dark mode overrides ─── */
+    body.dark {
+      --card-bg:      #1a1f2e;
+      --card-border:  #2d3348;
+      --card-text:    #e8eaf0;
+      --card-subtext: #9ca3af;
+      --card-tag-bg:  rgba(46, 196, 182, 0.15);
+      --accent-notion: #a78bfa;   /* lighter violet — readable on dark */
+      --accent-phil:   #d4a853;   /* lighter gold — readable on dark */
+    }
+
+    /* ─── Page intro ─── */
+    .blogs-intro {
+      text-align: center;
+      padding: 2.2rem 1rem 1rem;
+    }
+    .blogs-intro h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      margin-bottom: 0.4rem;
+    }
+    .blogs-intro p {
+      font-family: 'Source Serif 4', serif;
+      opacity: 0.7;
+      max-width: 520px;
+      margin: 0 auto;
+      font-size: 0.97rem;
+    }
+
+    /* ─── Section headings ─── */
+    .section-label {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-family: 'Playfair Display', serif;
+      font-size: 1.25rem;
+      margin: 2.4rem 0 1rem;
+      letter-spacing: 0.01em;
+    }
+    .section-label .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .dot-tech   { background: var(--accent-tech); }
+    .dot-notion { background: var(--accent-notion); }
+    .dot-phil   { background: var(--accent-phil); }
+
+    /* ─── Filter tabs (Tech Resources only) ─── */
+    .filter-tabs {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      margin-bottom: 1.1rem;
+    }
+    .filter-tab {
+      border: none;
+      background: none;
+      cursor: pointer;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.78rem;
+      padding: 0.3rem 0.8rem;
+      border-radius: 20px;
+      border: 1.5px solid var(--accent-tech);
+      color: var(--accent-tech);
+      opacity: 0.55;
+      transition: var(--transition);
+    }
+    .filter-tab.active, .filter-tab:hover {
+      opacity: 1;
+      background: var(--accent-tech-bg);
+    }
+
+    /* ─── Resource Grid (Tech) — 4 columns ─── */
+    .resource-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0.9rem;
+    }
+    @media (max-width: 900px) {
+      .resource-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 560px) {
+      .resource-grid { grid-template-columns: 1fr; }
+    }
+
+    .resource-card {
+      border-left: 3px solid var(--accent-tech);
+      background: var(--card-bg);
+      border-radius: 0 var(--border-radius) var(--border-radius) 0;
+      padding: var(--card-pad);
+      transition: var(--transition);
+      text-decoration: none;
+      display: block;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+      cursor: pointer;
+    }
+    .resource-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: var(--accent-tech);
+      opacity: 0;
+      transition: var(--transition);
+    }
+    .resource-card:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(0,0,0,0.14); }
+    .resource-card:hover::before { opacity: 0.04; }
+
+    /* Flash-up scroll animation */
+    .resource-card {
+      opacity: 0;
+      transform: translateY(18px);
+      animation: cardReveal 0.4s ease forwards;
+    }
+    @keyframes cardReveal {
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .resource-card:nth-child(1) { animation-delay: 0.05s; }
+    .resource-card:nth-child(2) { animation-delay: 0.10s; }
+    .resource-card:nth-child(3) { animation-delay: 0.15s; }
+    .resource-card:nth-child(4) { animation-delay: 0.20s; }
+    .resource-card:nth-child(5) { animation-delay: 0.25s; }
+    .resource-card:nth-child(6) { animation-delay: 0.30s; }
+    .resource-card:nth-child(7) { animation-delay: 0.35s; }
+    .resource-card:nth-child(8) { animation-delay: 0.40s; }
+
+    .resource-card .rc-type {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.68rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent-tech);
+      margin-bottom: 0.35rem;
+    }
+    .resource-card .rc-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 0.95rem;
+      line-height: 1.4;
+      margin-bottom: 0.3rem;
+      color: var(--card-text);
+    }
+    .resource-card .rc-desc {
+      font-family: 'Source Serif 4', serif;
+      font-size: 0.82rem;
+      color: var(--card-subtext);
+      line-height: 1.5;
+    }
+    .resource-card .rc-tags {
+      margin-top: 0.6rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.3rem;
+    }
+    .resource-card .tag {
+      font-size: 0.65rem;
+      font-family: 'JetBrains Mono', monospace;
+      padding: 0.15rem 0.5rem;
+      border-radius: 20px;
+      background: var(--card-tag-bg);
+      color: var(--accent-tech);
+    }
+
+    /* hidden resource cards via filter */
+    .resource-card[data-type] { display: block; }
+    .resource-card.hidden { display: none !important; }
+
+    /* ─── Notion Portal Card ─── */
+    .notion-portal {
+      border-left: 3px solid var(--accent-notion);
+      background: var(--card-bg);
+      border-radius: 0 var(--border-radius) var(--border-radius) 0;
+      padding: 1.8rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+    }
+    .notion-portal .np-left h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem;
+      margin-bottom: 0.4rem;
+      color: var(--card-text);
+    }
+    .notion-portal .np-left p {
+      font-family: 'Source Serif 4', serif;
+      font-size: 0.9rem;
+      color: var(--card-subtext);
+      max-width: 380px;
+      line-height: 1.6;
+    }
+    .notion-portal .np-badge {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.08em;
+      color: var(--accent-notion);
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+    }
+    .btn-notion {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.82rem;
+      padding: 0.55rem 1.2rem;
+      border: 1.5px solid var(--accent-notion);
+      border-radius: 6px;
+      color: var(--accent-notion);
+      text-decoration: none;
+      transition: var(--transition);
+      white-space: nowrap;
+    }
+    .btn-notion:hover {
+      background: var(--accent-notion);
+      color: #fff;
+    }
+
+    /* Notion sub-pages */
+    .notion-pages {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      margin-top: 1rem;
+    }
+    .notion-chip {
+      font-family: 'Source Serif 4', serif;
+      font-size: 0.82rem;
+      padding: 0.3rem 0.75rem;
+      border-radius: 20px;
+      background: rgba(124,58,237,0.10);
+      color: var(--accent-notion);
+      text-decoration: none;
+      transition: var(--transition);
+      border: 1px solid transparent;
+    }
+    .notion-chip:hover {
+      background: rgba(124,58,237,0.18);
+      border-color: var(--accent-notion);
+    }
+    body.dark .notion-chip { background: rgba(167,139,250,0.12); }
+    body.dark .notion-chip:hover { background: rgba(167,139,250,0.22); }
+
+    /* ─── Philosophy Cards ─── */
+    .phil-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .phil-card {
+      border-left: 3px solid var(--accent-phil);
+      background: var(--card-bg);
+      border-radius: 0 var(--border-radius) var(--border-radius) 0;
+      padding: var(--card-pad);
+      transition: var(--transition);
+      text-decoration: none;
+      display: block;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+    }
+    .phil-card:hover { transform: translateX(4px); box-shadow: 0 4px 16px rgba(0,0,0,0.10); }
+
+    .phil-card .pc-meta {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.68rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent-phil);
+      margin-bottom: 0.35rem;
+    }
+    .phil-card .pc-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.05rem;
+      margin-bottom: 0.3rem;
+      color: var(--card-text);
+    }
+    .phil-card .pc-author {
+      font-family: 'Source Serif 4', serif;
+      font-size: 0.82rem;
+      color: var(--card-subtext);
+      margin-bottom: 0.5rem;
+    }
+    .phil-card blockquote {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 0.92rem;
+      border-left: none;
+      padding: 0;
+      margin: 0;
+      color: var(--card-subtext);
+      line-height: 1.65;
+    }
+    .phil-card blockquote::before { content: '"'; }
+    .phil-card blockquote::after  { content: '"'; }
+
+    .phil-card .pc-status {
+      display: inline-block;
+      margin-top: 0.65rem;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.68rem;
+      padding: 0.15rem 0.55rem;
+      border-radius: 20px;
+      background: rgba(184,134,11,0.12);
+      color: var(--accent-phil);
+    }
+    body.dark .phil-card .pc-status { background: rgba(212,168,83,0.15); }
+
+    /* ─── Utility ─── */
+    main { max-width: 1100px; margin: 0 auto; padding: 0 1.4rem 3rem; }
+
+    /* Section label colours adapt */
+    .section-label { color: var(--card-text); }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <h1>Neeloy Bhattacharya</h1>
+  <div id="clock"></div>
+  <div class="social-bar">
+    <a href="https://github.com/BumMolecule" target="_blank" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+    <a href="/cdn-cgi/l/email-protection#19777c7c757660767f7f707a707875597e74787075377a7674" aria-label="Email"><i class="fa-solid fa-envelope"></i></a>
+    <a href="https://x.com/neeluspeaks" target="_blank" aria-label="Twitter"><i class="fa-brands fa-twitter-square"></i></a>
+    <a href="https://linkedin.com/in/neeloy-bhattacharya-here" target="_blank" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-square"></i></a>
+    <a href="https://boxd.it/8rmYf" target="_blank" aria-label="Letterboxd">🎬</a>
+    <a href="https://app.thestorygraph.com/profile/neeluism" target="_blank" aria-label="StoryGraph">📚</a>
+  </div>
+  <button id="theme-toggle">💡</button>
+</header>
+
+<nav>
+  <a href="index.html">Home</a>
+  <a href="blogs.html" class="active">Blogs</a>
+  <a href="#">Buzzing</a>
+</nav>
+
+<main>
+
+  <div class="blogs-intro">
+    <h2>Reading Room</h2>
+    <p>A living archive — things I've read, watched, thought about, and want to remember.</p>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       SECTION 1 · TECH RESOURCES
+  ══════════════════════════════════════════ -->
+  <div class="section-label">
+    <span class="dot dot-tech"></span>
+    Tech &amp; Science Resources
+  </div>
+
+  <div class="filter-tabs">
+    <button class="filter-tab active" data-filter="all">All</button>
+    <button class="filter-tab" data-filter="book">Books</button>
+    <button class="filter-tab" data-filter="blog">Blogs</button>
+    <button class="filter-tab" data-filter="video">Videos</button>
+    <button class="filter-tab" data-filter="course">Courses</button>
+  </div>
+
+  <div class="resource-grid" id="resource-grid">
+
+    <a class="resource-card" href="https://www.deeplearningbook.org/" target="_blank" data-type="book">
+      <div class="rc-type"><i class="fa-solid fa-book-open"></i> Book</div>
+      <div class="rc-title">The Deep Learning Book</div>
+      <div class="rc-desc">Goodfellow, Bengio & Courville — the canonical reference for neural network theory.</div>
+      <div class="rc-tags"><span class="tag">ML</span><span class="tag">Math</span><span class="tag">Free</span></div>
+    </a>
+
+    <a class="resource-card" href="https://lilianweng.github.io/" target="_blank" data-type="blog">
+      <div class="rc-type"><i class="fa-solid fa-rss"></i> Blog</div>
+      <div class="rc-title">Lil'Log by Lilian Weng</div>
+      <div class="rc-desc">OpenAI researcher's deeply detailed posts on RL, transformers, and diffusion models.</div>
+      <div class="rc-tags"><span class="tag">NLP</span><span class="tag">RL</span></div>
+    </a>
+
+    <a class="resource-card" href="https://www.youtube.com/playlist?list=PLZHQObOWTQDNU6R1_67000Dx_ZCJB-3pi" target="_blank" data-type="video">
+      <div class="rc-type"><i class="fa-solid fa-video"></i> Video</div>
+      <div class="rc-title">3Blue1Brown — Neural Networks</div>
+      <div class="rc-desc">Visualisation-first series that builds intuition for backprop and gradient descent.</div>
+      <div class="rc-tags"><span class="tag">Intuition</span><span class="tag">YouTube</span></div>
+    </a>
+
+    <a class="resource-card" href="https://pdos.csail.mit.edu/6.824/" target="_blank" data-type="course">
+      <div class="rc-type"><i class="fa-solid fa-graduation-cap"></i> Course</div>
+      <div class="rc-title">MIT 6.5840 Distributed Systems</div>
+      <div class="rc-desc">Legendary course with labs in Go. Consensus, replication, fault tolerance.</div>
+      <div class="rc-tags"><span class="tag">Systems</span><span class="tag">Free</span></div>
+    </a>
+
+    <a class="resource-card" href="https://distill.pub/" target="_blank" data-type="blog">
+      <div class="rc-type"><i class="fa-solid fa-rss"></i> Blog</div>
+      <div class="rc-title">Distill.pub</div>
+      <div class="rc-desc">Interactive, peer-reviewed ML articles. Clarity over brevity.</div>
+      <div class="rc-tags"><span class="tag">Interactive</span><span class="tag">Interpretability</span></div>
+    </a>
+
+    <a class="resource-card" href="https://www.statlearning.com/" target="_blank" data-type="book">
+      <div class="rc-type"><i class="fa-solid fa-book-open"></i> Book</div>
+      <div class="rc-title">An Introduction to Statistical Learning</div>
+      <div class="rc-desc">James, Witten et al. R & Python labs. The practical companion to ESL.</div>
+      <div class="rc-tags"><span class="tag">Stats</span><span class="tag">ML</span><span class="tag">Free PDF</span></div>
+    </a>
+
+    <a class="resource-card" href="https://colah.github.io/" target="_blank" data-type="blog">
+      <div class="rc-type"><i class="fa-solid fa-rss"></i> Blog</div>
+      <div class="rc-title">Chris Olah's Blog</div>
+      <div class="rc-desc">The original mechanistic interpretability essays. LSTMs, attention, circuits.</div>
+      <div class="rc-tags"><span class="tag">Interpretability</span><span class="tag">Visuals</span></div>
+    </a>
+
+    <a class="resource-card" href="https://www.fast.ai/" target="_blank" data-type="course">
+      <div class="rc-type"><i class="fa-solid fa-graduation-cap"></i> Course</div>
+      <div class="rc-title">fast.ai — Practical Deep Learning</div>
+      <div class="rc-desc">Top-down, code-first deep learning. Best starting point for applied ML.</div>
+      <div class="rc-tags"><span class="tag">Applied</span><span class="tag">Free</span></div>
+    </a>
+
+  </div><!-- /resource-grid -->
+
+
+  <!-- ══════════════════════════════════════════
+       SECTION 2 · NOTION
+  ══════════════════════════════════════════ -->
+  <div class="section-label">
+    <span class="dot dot-notion"></span>
+    My Notion Space
+  </div>
+
+  <div class="notion-portal">
+    <div class="np-left">
+      <div class="np-badge"><i class="fa-solid fa-cube"></i> &nbsp;Personal Knowledge Base</div>
+      <h3>The Second Brain</h3>
+      <p>Notes, reading logs, project trackers, and research scratchpads — all in one open Notion workspace. Have a look around.</p>
+
+      <!-- Optional: chip-links to specific sub-pages -->
+      <div class="notion-pages">
+        <a class="notion-chip" href="#" target="_blank">📓 Reading Notes</a>
+        <a class="notion-chip" href="#" target="_blank">🔬 Research Log</a>
+        <a class="notion-chip" href="#" target="_blank">🗂 Project Tracker</a>
+        <a class="notion-chip" href="#" target="_blank">✏️ Essay Drafts</a>
+      </div>
+    </div>
+
+    <a class="btn-notion" href="#" target="_blank">
+      <i class="fa-solid fa-arrow-up-right-from-square"></i> Open Notion
+    </a>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════
+       SECTION 3 · PHILOSOPHICAL READINGS
+  ══════════════════════════════════════════ -->
+  <div class="section-label">
+    <span class="dot dot-phil"></span>
+    Philosophical Readings
+  </div>
+
+  <div class="phil-list">
+
+    <a class="phil-card" href="https://www.amazon.com/Myth-Sisyphus-Albert-Camus/dp/0679733736" target="_blank">
+      <div class="pc-meta"><i class="fa-solid fa-feather-pointed"></i> Essay</div>
+      <div class="pc-title">The Myth of Sisyphus</div>
+      <div class="pc-author">Albert Camus · 1942</div>
+      <blockquote>One must imagine Sisyphus happy.</blockquote>
+      <span class="pc-status">✓ Read</span>
+    </a>
+
+    <a class="phil-card" href="https://www.gutenberg.org/ebooks/55317" target="_blank">
+      <div class="pc-meta"><i class="fa-solid fa-scroll"></i> Treatise</div>
+      <div class="pc-title">Meditations</div>
+      <div class="pc-author">Marcus Aurelius · 170–180 AD</div>
+      <blockquote>You have power over your mind — not outside events. Realise this, and you will find strength.</blockquote>
+      <span class="pc-status">✓ Read</span>
+    </a>
+
+    <a class="phil-card" href="https://www.amazon.com/Being-Time-Martin-Heidegger/dp/0061575593" target="_blank">
+      <div class="pc-meta"><i class="fa-solid fa-book"></i> Book</div>
+      <div class="pc-title">Being and Time</div>
+      <div class="pc-author">Martin Heidegger · 1927</div>
+      <blockquote>Dasein is always already thrown into a world it did not choose.</blockquote>
+      <span class="pc-status">📖 Reading</span>
+    </a>
+
+    <a class="phil-card" href="https://www.amazon.com/Reasons-Persons-Derek-Parfit/dp/019824908X" target="_blank">
+      <div class="pc-meta"><i class="fa-solid fa-book"></i> Book</div>
+      <div class="pc-title">Reasons and Persons</div>
+      <div class="pc-author">Derek Parfit · 1984</div>
+      <blockquote>We are not the separately existing beings that we thought we were.</blockquote>
+      <span class="pc-status">📚 To Read</span>
+    </a>
+
+  </div><!-- /phil-list -->
+
+</main>
+
+<footer>
+  <p>The Truth Is Out There · © 2026</p>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="js/main.js"></script>
+<script>
+  // ─── Filter tabs logic ───
+  const tabs = document.querySelectorAll('.filter-tab');
+  const cards = document.querySelectorAll('.resource-card[data-type]');
+
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      tabs.forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+
+      const filter = tab.dataset.filter;
+      cards.forEach(card => {
+        if (filter === 'all' || card.dataset.type === filter) {
+      
