@@ -1,0 +1,69 @@
+/* =========================================================
+   base.css — design tokens, resets, typography, themes
+   ========================================================= */
+
+:root {
+  /* Dark theme (default) */
+  --navy:   #0b1c2d;
+  --bg:     #0d1117;
+  --card:   #161b22;
+  --text:   #e6edf3;
+  --muted:  #8b949e;
+  --accent: #58a6ff;
+  --border: #1f3b57;
+
+  /* Word-rotation swatches (dark) */
+  --word-ds:   #58a6ff;
+  --word-chem: #f2cc60;
+  --word-ml:   #3fb950;
+  --word-mu:   #f85149;
+  --word-quiz: #a371f7;
+
+  --radius: 12px;
+  --transition: 0.22s ease;
+}
+
+/* Light theme — warm parchment with proper text contrast */
+body.light {
+  --navy:   #efe6d4;         /* header/nav band */
+  --bg:     #f5efe4;         /* main parchment */
+  --card:   #fffaf0;         /* card, floats above bg */
+  --text:   #2a1f14;         /* deep espresso, high contrast on parchment */
+  --muted:  #6b5842;         /* warm neutral, not grey */
+  --accent: #1f6feb;
+  --border: #d8ccb5;
+
+  /* Word-rotation swatches (light) — darker so they read on parchment */
+  --word-ds:   #1f6feb;
+  --word-chem: #a8770a;
+  --word-ml:   #1f7a2e;      /* previously #3fb950 — too pale on cream */
+  --word-mu:   #b91d1d;
+  --word-quiz: #6f2fc9;
+}
+
+/* Respect system preference on first visit (main.js can override) */
+@media (prefers-color-scheme: light) {
+  body:not(.dark):not(.light) {
+    /* main.js applies .light on load if user has no saved choice */
+  }
+}
+
+body {
+  margin: 0;
+  font-family: "Source Serif 4", Georgia, serif;
+  font-feature-settings: "liga", "onum";
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.7;
+  transition: background 0.35s ease, color 0.35s ease;
+}
+
+h1, h2, h3 {
+  font-family: "Playfair Display", serif;
+  letter-spacing: -0.01em;
+  color: var(--text);
+}
+
+p { color: var(--text); }
+
+a { color: var(--accent); }

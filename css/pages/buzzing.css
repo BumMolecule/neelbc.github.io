@@ -1,0 +1,126 @@
+/* =========================================================
+   buzzing.css — Slides gallery page
+   ========================================================= */
+
+.buzzing-intro {
+  text-align: center;
+  margin-bottom: 30px;
+}
+.buzzing-intro h2 {
+  font-size: 2rem;
+  margin: 0 0 8px;
+}
+.buzzing-intro p {
+  color: var(--muted);
+  max-width: 560px;
+  margin: 0 auto;
+}
+
+.buzzing-layout {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  gap: 24px;
+  align-items: start;
+}
+
+@media (max-width: 800px) {
+  .buzzing-layout { grid-template-columns: 1fr; }
+}
+
+.deck-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  border-right: 1px solid var(--border);
+  padding-right: 16px;
+}
+@media (max-width: 800px) {
+  .deck-list {
+    flex-direction: row;
+    overflow-x: auto;
+    border-right: none;
+    border-bottom: 1px solid var(--border);
+    padding: 0 0 12px;
+  }
+}
+
+.deck-item button {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: 10px 12px;
+  background: none;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  color: var(--muted);
+  font-family: inherit;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: var(--transition);
+}
+.deck-item button:hover {
+  color: var(--text);
+  border-color: var(--border);
+}
+.deck-item.active button {
+  color: var(--text);
+  border-color: var(--accent);
+  background: rgba(88, 166, 255, 0.08);
+}
+
+.deck-viewer {
+  background: var(--card);
+  border-radius: var(--radius);
+  padding: 16px;
+  border: 1px solid var(--border);
+}
+.deck-viewer h3 {
+  margin: 0 0 4px;
+  font-size: 1.2rem;
+}
+.deck-viewer .deck-desc {
+  color: var(--muted);
+  font-size: 0.9rem;
+  margin: 0 0 14px;
+}
+.deck-frame {
+  position: relative;
+  width: 100%;
+  padding-top: 60%;         /* 5:3 aspect for Google Slides */
+  border-radius: 8px;
+  overflow: hidden;
+  background: #000;
+}
+.deck-frame iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+.deck-actions {
+  margin-top: 12px;
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+}
+.deck-actions a,
+.deck-actions button {
+  background: none;
+  border: 1px solid var(--border);
+  color: var(--muted);
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  text-decoration: none;
+  font-size: 0.85rem;
+  transition: var(--transition);
+}
+.deck-actions a:hover,
+.deck-actions button:hover {
+  color: var(--text);
+  border-color: var(--accent);
+}

@@ -4,654 +4,241 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Blogs & Resources · Neeloy Bhattacharya</title>
+  <meta name="description" content="A living archive — things read, watched, thought about, and worth remembering." />
+  <link rel="icon" type="image/svg+xml" href="assets/icons/favicon.svg" />
 
-  <!-- Same fonts as index.html -->
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;1,500&family=Source+Serif+4:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;1,500&family=Source+Serif+4:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
 
-  <!-- Link your existing stylesheet -->
-  <link rel="stylesheet" href="css/style.css" />
-
-  <style>
-    /* ─── CSS Variables (mirrors your existing palette; override for dark mode too) ─── */
-    :root {
-      --accent-tech:   #24b8aa;   /* teal  — tech resources */
-      --accent-notion: #603894;   /* violet — notion */
-      --accent-phil:   #ad873a;   /* gold  — philosophy */
-      --accent-tech-bg:   rgba(13, 209, 189, 0.07);
-      --accent-notion-bg: rgba(130, 97, 173, 0.07);
-      --accent-phil-bg:   rgba(224, 155, 18, 0.07);
-      --border-radius: 10px;
-      --card-pad: 1.4rem 1.6rem;
-      --transition: 0.22s ease;
-    }
-
-    /* ─── Page intro ─── */
-    .blogs-intro {
-      text-align: center;
-      padding: 2.2rem 1rem 1rem;
-    }
-    .blogs-intro h2 {
-      font-family: 'Playfair Display', serif;
-      font-size: 2rem;
-      margin-bottom: 0.4rem;
-    }
-    .blogs-intro p {
-      font-family: 'Source Serif 4', serif;
-      opacity: 0.7;
-      max-width: 520px;
-      margin: 0 auto;
-      font-size: 0.97rem;
-    }
-
-    /* ─── Section headings ─── */
-    .section-label {
-      display: flex;
-      align-items: center;
-      gap: 0.6rem;
-      font-family: 'Playfair Display', serif;
-      font-size: 1.25rem;
-      margin: 2.4rem 0 1rem;
-      letter-spacing: 0.01em;
-    }
-    .section-label .dot {
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-      flex-shrink: 0;
-    }
-    .dot-tech   { background: var(--accent-tech); }
-    .dot-notion { background: var(--accent-notion); }
-    .dot-phil   { background: var(--accent-phil); }
-
-    /* ─── Filter tabs (Tech Resources only) ─── */
-    .filter-tabs {
-      display: flex;
-      gap: 0.5rem;
-      flex-wrap: wrap;
-      margin-bottom: 1.1rem;
-    }
-    .filter-tab {
-      border: none;
-      background: none;
-      cursor: pointer;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.78rem;
-      padding: 0.3rem 0.8rem;
-      border-radius: 20px;
-      border: 1.5px solid var(--accent-tech);
-      color: var(--accent-tech);
-      opacity: 0.55;
-      transition: var(--transition);
-    }
-    .filter-tab.active, .filter-tab:hover {
-      opacity: 1;
-      background: var(--accent-tech-bg);
-    }
-
-    /* ─── Resource Grid (Tech) ─── */
-    .resource-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 1.4rem;
-    }
-
-    .resource-card {
-      border-left: 3px solid var(--accent-tech);
-      background: var(--accent-tech-bg);
-      border-radius: 0 var(--border-radius) var(--border-radius) 0;
-      padding: var(--card-pad);
-      transition: var(--transition);
-      text-decoration: none;
-      display: block;
-      position: relative;
-      overflow: hidden;
-    }
-    .resource-card::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: var(--accent-tech);
-      opacity: 0;
-      transition: var(--transition);
-    }
-    .resource-card:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.12); }
-    .resource-card:hover::before { opacity: 0.04; }
-
-    .resource-card .rc-type {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.7rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--accent-tech);
-      margin-bottom: 0.35rem;
-      opacity: 0.85;
-    }
-    .resource-card .rc-title {
-      font-family: 'Playfair Display', serif;
-      color: #246213;
-      font-size: 1.1rem;
-      font-weight: 600;
-      line-height: 1.4;
-      margin-bottom: 0.3rem;
-    }
-    .resource-card .rc-desc {
-      font-family: 'Source Serif 4', serif;
-      color: #76c79d;   /* softer grey */
-      opacity: 1;       /* remove faded look */
-      font-size: 0.95rem;
-      opacity: 0.8;
-      line-height: 1.5;
-    }
-    .resource-card .rc-tags {
-      margin-top: 0.6rem;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.3rem;
-    }
-    .resource-card .tag {
-      font-size: 0.68rem;
-      font-family: 'JetBrains Mono', monospace;
-      padding: 0.15rem 0.5rem;
-      border-radius: 20px;
-      background: rgba(46,196,182,0.15);
-      color: var(--accent-tech);
-    }
-
-    /* hidden resource cards via filter */
-    .resource-card[data-type] { display: block; }
-    .resource-card.hidden { display: none; }
-
-    /* ─── Notion Portal Card ─── */
-    .notion-portal {
-      border-left: 3px solid var(--accent-notion);
-      background: var(--accent-notion-bg);
-      border-radius: 0 var(--border-radius) var(--border-radius) 0;
-      padding: 1.8rem 2rem;
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      align-items: start;
-      justify-content: space-between;
-      gap: 1.5rem;
-      flex-wrap: wrap;
-    }
-    .notion-portal .np-left h3 {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.3rem;
-      margin-bottom: 0.4rem;
-    }
-    .notion-portal .np-left p {
-      font-family: 'Source Serif 4', serif;
-      font-size: 0.9rem;
-      opacity: 0.65;
-      max-width: 380px;
-      line-height: 1.6;
-    }
-    .notion-portal .np-badge {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.7rem;
-      letter-spacing: 0.08em;
-      color: var(--accent-notion);
-      text-transform: uppercase;
-      margin-bottom: 0.5rem;
-      opacity: 0.85;
-    }
-    .btn-notion {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.45rem;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.82rem;
-      padding: 0.55rem 1.2rem;
-      border: 1.5px solid var(--accent-notion);
-      border-radius: 6px;
-      color: var(--accent-notion);
-      text-decoration: none;
-      transition: var(--transition);
-      white-space: nowrap;
-    }
-    .btn-notion:hover {
-      background: var(--accent-notion);
-      color: #fff;
-    }
-
-    /* Notion sub-pages */
-    .notion-pages {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.6rem;
-      margin-top: 1rem;
-    }
-    .notion-chip {
-      font-family: 'Source Serif 4', serif;
-      font-size: 0.82rem;
-      padding: 0.3rem 0.75rem;
-      border-radius: 20px;
-      background: rgba(155,114,207,0.12);
-      color: var(--accent-notion);
-      text-decoration: none;
-      transition: var(--transition);
-    }
-    .notion-chip:hover { background: rgba(155,114,207,0.25); }
-
-    /* ─── Philosophy Cards ─── */
-    .phil-list {
-      display: flex;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 1.4rem;
-    }
-    .phil-card {
-      border-left: 3px solid var(--accent-phil);
-      background: var(--accent-phil-bg);
-      border-radius: 0 var(--border-radius) var(--border-radius) 0;
-      padding: var(--card-pad);
-      transition: var(--transition);
-    }
-    .phil-card:hover { transform: translateX(3px); }
-
-    .phil-card .pc-meta {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.7rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--accent-phil);
-      opacity: 0.85;
-      margin-bottom: 0.35rem;
-    }
-    .phil-card .pc-title {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.05rem;
-      margin-bottom: 0.4rem;
-    }
-    .phil-card .pc-author {
-      font-family: 'Source Serif 4', serif;
-      font-size: 0.82rem;
-      opacity: 0.5;
-      margin-bottom: 0.5rem;
-    }
-    .phil-card blockquote {
-      font-family: 'Playfair Display', serif;
-      font-style: italic;
-      font-size: 0.92rem;
-      border-left: none;
-      padding: 0;
-      margin: 0;
-      opacity: 0.7;
-      line-height: 1.65;
-    }
-    .phil-card blockquote::before { content: '"'; }
-    .phil-card blockquote::after  { content: '"'; }
-
-    .phil-card .pc-status {
-      display: inline-block;
-      margin-top: 0.65rem;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.68rem;
-      padding: 0.15rem 0.55rem;
-      border-radius: 20px;
-      background: rgba(212,168,83,0.15);
-      color: var(--accent-phil);
-    }
-
-    /* ─── Utility ─── */
-    main { max-width: 1400px; margin: 0 auto; padding: 0 1.2rem 3rem; }
-
-    /* Dark mode awareness — hook into whatever toggle your main.js uses */
-    body.dark .resource-card,
-    body.dark .notion-portal,
-    body.dark .phil-card {
-      filter: brightness(1.05);
-    }
-  </style>
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/layout.css" />
+  <link rel="stylesheet" href="css/components.css" />
+  <link rel="stylesheet" href="css/pages/blogs.css" />
 </head>
 
 <body>
+  <div data-include="partials/header.html"></div>
+  <div data-include="partials/nav.html"></div>
 
-<header>
-  <h1>Neeloy Bhattacharya</h1>
-  <div id="clock"></div>
-  <div class="social-bar">
-    <a href="https://github.com/BumMolecule" target="_blank" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
-    <a href="mailto:neeloyofficial@gmail.com" aria-label="Email"><i class="fa-solid fa-envelope"></i></a>
-    <a href="https://x.com/neeluspeaks" target="_blank" aria-label="Twitter"><i class="fa-brands fa-twitter-square"></i></a>
-    <a href="https://linkedin.com/in/neeloy-bhattacharya-here" target="_blank" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
-    <a href="https://boxd.it/8rmYf" target="_blank" aria-label="Letterboxd">🎬</a>
-    <a href="https://app.thestorygraph.com/profile/neeluism" target="_blank" aria-label="StoryGraph">📚</a>
-  </div>
-  <button id="theme-toggle">💡</button>
-</header>
+  <main class="blogs">
 
-<nav>
-  <a href="index.html">Home</a>
-  <a href="blogs.html" class="active">Blogs</a>
-  <a href="#">Buzzing</a>
-</nav>
-
-<main>
-
-  <div class="blogs-intro">
-    <h2>Reading Room</h2>
-    <p>A living archive — things I've read, watched, thought about, and want to remember.</p>
-  </div>
-
-  <!-- ══════════════════════════════════════════
-       SECTION 1 · TECH RESOURCES
-  ══════════════════════════════════════════ -->
-  <div class="section-label">
-    <span class="dot dot-tech"></span>
-    SciML and Infra
-  </div>
-
-  <div class="filter-tabs">
-    <button class="filter-tab active" data-filter="all">All</button>
-    <button class="filter-tab" data-filter="book">Books</button>
-    <button class="filter-tab" data-filter="blog">Blogs</button>
-    <button class="filter-tab" data-filter="video">Videos</button>
-    <button class="filter-tab" data-filter="course">Courses</button>
-  </div>
-
-  <div class="resource-grid" id="resource-grid">
-    
-    <a class="resource-card" href="https://github.com/rlepsch/SOLUTIONS_NOTEBOOKS_UDL" target="_blank" data-type="book">
-      <div class="rc-type"><i class="fa-solid fa-book-open"></i> Book</div>
-      <div class="rc-title">UDL Notebooks</div>
-      <div class="rc-desc">Notebook solutions to the exercises in Understanding Deep Learning (UDL) by Simon & Richard.</div>
-      <div class="rc-tags">
-        <span class="tag">DL</span>
-        <span class="tag">Math</span>
-        <span class="tag">NN</span>
-      </div>
-    </a>
-
-    <a class="resource-card" href="https://www.learnpytorch.io/" target="_blank" data-type="blog">
-      <div class="rc-type"><i class="fa-solid fa-rss"></i> Course</div>
-      <div class="rc-title">ZtM PyTorch </div>
-      <div class="rc-desc">PyTorch essentials and detailed colabs divided into chapters, reccoed by Nitesh.</div>
-      <div class="rc-tags">
-        <span class="tag">DL</span>
-        <span class="tag">NN</span>
-        <span class="tag">Hands-on</span>
-      </div>
-    </a>
-
-    <a class="resource-card" href="https://youtube.com/playlist?list=PLZHQObOWTQDNU6R1_67000Dx_ZCJB-3pi&si=MZbh2RRIYfZEqv1U" target="_blank" data-type="video">
-      <div class="rc-type"><i class="fa-solid fa-video"></i> Video</div>
-      <div class="rc-title">3Blue1Brown: Neural Networks</div>
-      <div class="rc-desc">Visualisation-first series that builds intuition for backprop and gradient descent.</div>
-      <div class="rc-tags">
-        <span class="tag">Visual</span>
-        <span class="tag">DL</span>
-      </div>
-    </a>
-
-    
-    <a class="resource-card" href="https://youtu.be/LbKF96HGx-M?si=Jctig0Vtie2Jo3Ma" target="_blank" data-type="video">
-      <div class="rc-type"><i class="fa-solid fa-video"></i> Video</div>
-      <div class="rc-title">Srijit Mukherjee: LLM</div>
-      <div class="rc-desc">Same guy presents a sketch of how LLMs work.</div>
-      <div class="rc-tags">
-        <span class="tag">Visual</span>
-        <span class="tag">DL</span>
-        <span class="tag">NN</span>
-      </div>
-    </a>
-
-    <a class="resource-card" href="https://youtube.com/playlist?list=PLUl4u3cNGP60YyhMjYmXuVmX562QcClSp&si=UvM_mLOEkyylQ1O4" target="_blank" data-type="course">
-      <div class="rc-type"><i class="fa-solid fa-graduation-cap"></i> Course</div>
-      <div class="rc-title">MIT 15.773 Hands-On Deep Learning Spring 2024</div>
-      <div class="rc-desc">Intuitive non-math lectures on DL to Gen AI by Prof. Rama Ramakrishnan.</div>
-      <div class="rc-tags">
-        <span class="tag">DL</span>
-        <span class="tag">Gen AI</span>
-        <span class="tag">LLM</span>
-        <span class="tag">Visual</span>
-      </div>
-    </a>
-
-    <a class="resource-card" href="https://distill.pub/" target="_blank" data-type="blog">
-      <div class="rc-type"><i class="fa-solid fa-rss"></i> Blog</div>
-      <div class="rc-title">Distill.pub</div>
-      <div class="rc-desc">Interactive, peer-reviewed ML articles. Clarity over brevity.</div>
-      <div class="rc-tags">
-        <span class="tag">Read</span>
-        <span class="tag">GNN</span>
-        <span class="tag">RNN</span>
-      </div>
-    </a>
-
-    <a class="resource-card" href="https://islp.readthedocs.io/en/latest/labs.html" target="_blank" data-type="book">
-      <div class="rc-type"><i class="fa-solid fa-book-open"></i> Book</div>
-      <div class="rc-title">An Introduction to Statistical Learning</div>
-      <div class="rc-desc">James, Witten et al. R & Python labs. The practical companion to ESL.</div>
-      <div class="rc-tags">
-        <span class="tag">Hands-on</span>
-        <span class="tag">DL</span>
-      </div>
-    </a>
-
-    <a class="resource-card" href="https://www.deeplearningbook.org/" target="_blank" data-type="book">
-      <div class="rc-type"><i class="fa-solid fa-book-open"></i> Book</div>
-      <div class="rc-title">The Deep Learning Book</div>
-      <div class="rc-desc">Goodfellow, Bengio & Courville — the canonical reference for neural network theory. Not for beginners.</div>
-      <div class="rc-tags">
-        <span class="tag">DL</span>
-        <span class="tag">Math</span>
-        <span class="tag">NN</span>
-      </div>
-    </a>
-
-    <a class="resource-card" href="https://youtube.com/playlist?list=PLAqhIrjkxbuWI23v9cThsA9GvCAUhRvKZ&si=-QcE6UsDjqN49N1n" target="_blank" data-type="book">
-      <div class="rc-type"><i class="fa-solid fa-book-open"></i> Video</div>
-      <div class="rc-title">Zero to Hero: Andrej Karpathy</div>
-      <div class="rc-desc">Eminent YT series by Andrej Karpathy on building neural networks from scratch.</div>
-      <div class="rc-tags">
-        <span class="tag">NN</span>
-        <span class="tag">Math</span>
-        <span class="tag">LLM</span>
-        <span class="tag">Gen AI</span>
-      </div>
-    </a>
-
-    <a class="resource-card" href="https://youtube.com/playlist?list=PLAqhIrjkxbuWI23v9cThsA9GvCAUhRvKZ&si=-QcE6UsDjqN49N1n" target="_blank" data-type="book">
-      <div class="rc-type"><i class="fa-solid fa-book-open"></i> Book</div>
-      <div class="rc-title">Zero to Hero: Andrej Karpathy</div>
-      <div class="rc-desc">Eminent YT series by Andrej Karpathy on building neural networks from scratch.</div>
-      <div class="rc-tags">
-        <span class="tag">NN</span>
-        <span class="tag">Math</span>
-        <span class="tag">LLM</span>
-        <span class="tag">Gen AI</span>
-      </div>
-    </a>
-
-    <a class="resource-card" href="https://youtube.com/playlist?list=PLZ2ps__7DhBZVxMrSkTIcG6zZBDKUXCnM&si=1l-hQ9HFBeXE4x19" target="_blank" data-type="book">
-      <div class="rc-type"><i class="fa-solid fa-book-open"></i> Video</div>
-      <div class="rc-title">IITM: BS Data Science Lectures</div>
-      <div class="rc-desc">Mitesh Khapra's series on Deep Learning from scratch.</div>
-      <div class="rc-tags">
-        <span class="tag">DL</span>
-        <span class="tag">Math</span>
-        <span class="tag">NN</span>
-      </div>
-    </a>
-
-    <a class="resource-card" href="https://colah.github.io/posts/2015-08-Understanding-LSTMs/" target="_blank" data-type="book">
-      <div class="rc-type"><i class="fa-solid fa-book-open"></i> Blog</div>
-      <div class="rc-title">Understanding LSTM Networks</div>
-      <div class="rc-desc">Chris Olah's blog post on LSTMs.</div>
-      <div class="rc-tags">
-        <span class="tag">Read</span>
-        <span class="tag">NN</span>
-      </div>
-    </a>
-
-    <a class="resource-card" href="https://colah.github.io/posts/2014-07-Conv-Nets-Modular/" target="_blank" data-type="book">
-      <div class="rc-type"><i class="fa-solid fa-book-open"></i> Blog</div>
-      <div class="rc-title">Understanding Convolutional Networks</div>
-      <div class="rc-desc">Chris Olah's blog post on convolutional networks.</div>
-      <div class="rc-tags">
-        <span class="tag">Read</span>
-        <span class="tag">NN</span>
-      </div>
-    </a>
-
-    <a class="resource-card" href="https://colah.github.io/posts/2015-08-Backprop/" target="_blank" data-type="book">
-      <div class="rc-type"><i class="fa-solid fa-book-open"></i> Blog</div>
-      <div class="rc-title">Backpropagation Explained</div>
-      <div class="rc-desc">Chris Olah's blog post on backpropagation.</div>
-      <div class="rc-tags">
-        <span class="tag">Read</span>
-        <span class="tag">Math</span>
-        <span class="tag">NN</span>
-      </div>
-    </a>
-
-    <a class="resource-card" href="https://youtube.com/playlist?list=PLJ0WcPQS7xJVJr6ceIPFSkAGAgrkmw1c9&si=5RxVP6_Mxx8b-4nP" target="_blank" data-type="book">
-      <div class="rc-type"><i class="fa-solid fa-book-open"></i> Video</div>
-      <div class="rc-title">AlphaFold from scratch series</div>
-      <div class="rc-desc">This series involves Pytorch and Evoformer.</div>
-      <div class="rc-tags">
-        <span class="tag">Bio</span>
-        <span class="tag">DL</span>
-        <span class="tag">NN</span>
-      </div>
-    </a>
-
-    <a class="resource-card" href="https://youtu.be/0jWOZoTsYzI?si=LiIEaaJwPH2U9LGI" target="_blank" data-type="book">
-      <div class="rc-type"><i class="fa-solid fa-book-open"></i> Video</div>
-      <div class="rc-title">Lecture of DL in Life Sciences</div>
-      <div class="rc-desc">Manolis Kellis of MIT talks online in 2021.</div>
-      <div class="rc-tags">
-        <span class="tag">Bio</span>
-        <span class="tag">DL</span>
-        <span class="tag">NN</span>
-      </div>
-    </a>
-
-    <a class="resource-card" href="https://antaripasaha.notion.site/Data-Science-All-in-one-f7b861fc69dd49439231b8c14a0e330b" target="_blank" data-type="book">
-      <div class="rc-type"><i class="fa-solid fa-book-open"></i> Blog</div>
-      <div class="rc-title">DS Roadmap</div>
-      <div class="rc-desc">Antaripa Saha's Notion Guide</div>
-      <div class="rc-tags">
-        <span class="tag">Read</span>
-        <span class="tag">DL</span>
-        <span class="tag">Math</span>
-      </div>
-    </a>
-
-    <a class="resource-card" href="https://www.iamtk.co/ai-ml-for-biology-and-healthcare-a-learning-path" target="_blank" data-type="book">
-      <div class="rc-type"><i class="fa-solid fa-book-open"></i> Blog</div>
-      <div class="rc-title">AI/ML for Biology and Healthcare</div>
-      <div class="rc-desc">The legend TK Kinoshita strives consistency in his learning path.</div>
-      <div class="rc-tags">
-        <span class="tag">Bio</span>
-        <span class="tag">DL</span>
-        <span class="tag">NN</span>
-      </div>
-    </a>
-
-  </div><!-- /resource-grid -->
-
-
-  <!-- ══════════════════════════════════════════
-       SECTION 2 · NOTION
-  ══════════════════════════════════════════ -->
-  <div class="section-label">
-    <span class="dot dot-notion"></span>
-    Notion Space
-  </div>
-
-  <div class="notion-portal">
-    <div class="np-left">
-      <div class="np-badge"><i class="fa-solid fa-cube"></i> &nbsp;Personal Knowledge Base</div>
-      <h3>The Second Brain</h3>
-      <p>Reading logs, project trackers for documenting my projects and important concepts.</p>
-
-      <!-- Optional: chip-links to specific sub-pages -->
-      <div class="notion-pages">
-        <a class="notion-chip" href="https://www.notion.so/Notes-30502559d30b80b3a157e8e19ce7ead3?source=copy_link" target="_blank">📓 Reading Notes</a>
-        <a class="notion-chip" href="https://www.notion.so/Monthly-Dashboard-30902559d30b8044ab9cf72cbcb3781e?source=copy_link" target="_blank">🗂 Project Tracker</a>
-      </div>
+    <div class="blogs-intro">
+      <h2>Reading Room</h2>
+      <p>A living archive — things I've read, watched, thought about, and want to remember.</p>
     </div>
 
-    <a class="btn-notion" href="https://www.notion.so/Notes-30502559d30b80b3a157e8e19ce7ead3?source=copy_link" target="_blank">
-      <i class="fa-solid fa-arrow-up-right-from-square"></i> Open Notion
-    </a>
-  </div>
-
-
-  <!-- ══════════════════════════════════════════
-       SECTION 3 · PHILOSOPHICAL READINGS
-  ══════════════════════════════════════════ -->
-  <div class="section-label">
-    <span class="dot dot-phil"></span>
-    Life and Beyond
-  </div>
-
-  <div class="phil-list">
-
-    <div class="phil-card">
-      <div class="pc-meta"><i class="fa-solid fa-feather-pointed"></i> Essay</div>
-      <div class="pc-title">The Myth of Sisyphus</div>
-      <div class="pc-author">Albert Camus · 1942</div>
-      <blockquote>One must imagine Sisyphus happy.</blockquote>
-      <span class="pc-status">✓ Read</span>
+    <!-- ═══════════ SECTION 1 · TECH RESOURCES ═══════════ -->
+    <div class="section-label">
+      <span class="dot dot-tech"></span>
+      SciML and Infra
     </div>
 
-    <div class="phil-card">
-      <div class="pc-meta"><i class="fa-solid fa-scroll"></i> Treatise</div>
-      <div class="pc-title">Meditations</div>
-      <div class="pc-author">Marcus Aurelius · 170–180 AD</div>
-      <blockquote>You have power over your mind — not outside events. Realise this, and you will find strength.</blockquote>
-      <span class="pc-status">✓ Read</span>
+    <div class="filter-tabs">
+      <button class="filter-tab active" data-filter="all">All</button>
+      <button class="filter-tab" data-filter="book">Books</button>
+      <button class="filter-tab" data-filter="blog">Blogs</button>
+      <button class="filter-tab" data-filter="video">Videos</button>
+      <button class="filter-tab" data-filter="course">Courses</button>
     </div>
 
-    <div class="phil-card">
-      <div class="pc-meta"><i class="fa-solid fa-book"></i> Book</div>
-      <div class="pc-title">Being and Time</div>
-      <div class="pc-author">Martin Heidegger · 1927</div>
-      <blockquote>Dasein is always already thrown into a world it did not choose.</blockquote>
-      <span class="pc-status">📖 Reading</span>
+    <div class="resource-grid" id="resource-grid">
+
+      <a class="resource-card" href="https://github.com/rlepsch/SOLUTIONS_NOTEBOOKS_UDL" target="_blank" rel="noopener" data-type="book">
+        <div class="rc-type"><i class="fa-solid fa-book-open"></i> Book</div>
+        <div class="rc-title">UDL Notebooks</div>
+        <div class="rc-desc">Notebook solutions to the exercises in Understanding Deep Learning (UDL) by Simon &amp; Richard.</div>
+        <div class="rc-tags"><span class="tag">DL</span><span class="tag">Math</span><span class="tag">NN</span></div>
+      </a>
+
+      <a class="resource-card" href="https://www.learnpytorch.io/" target="_blank" rel="noopener" data-type="course">
+        <div class="rc-type"><i class="fa-solid fa-graduation-cap"></i> Course</div>
+        <div class="rc-title">ZtM PyTorch</div>
+        <div class="rc-desc">PyTorch essentials and detailed colabs divided into chapters, reccoed by Nitesh.</div>
+        <div class="rc-tags"><span class="tag">DL</span><span class="tag">NN</span><span class="tag">Hands-on</span></div>
+      </a>
+
+      <a class="resource-card" href="https://youtube.com/playlist?list=PLZHQObOWTQDNU6R1_67000Dx_ZCJB-3pi&si=MZbh2RRIYfZEqv1U" target="_blank" rel="noopener" data-type="video">
+        <div class="rc-type"><i class="fa-solid fa-video"></i> Video</div>
+        <div class="rc-title">3Blue1Brown: Neural Networks</div>
+        <div class="rc-desc">Visualisation-first series that builds intuition for backprop and gradient descent.</div>
+        <div class="rc-tags"><span class="tag">Visual</span><span class="tag">DL</span></div>
+      </a>
+
+      <a class="resource-card" href="https://youtu.be/LbKF96HGx-M?si=Jctig0Vtie2Jo3Ma" target="_blank" rel="noopener" data-type="video">
+        <div class="rc-type"><i class="fa-solid fa-video"></i> Video</div>
+        <div class="rc-title">Srijit Mukherjee: LLM</div>
+        <div class="rc-desc">Same guy presents a sketch of how LLMs work.</div>
+        <div class="rc-tags"><span class="tag">Visual</span><span class="tag">DL</span><span class="tag">NN</span></div>
+      </a>
+
+      <a class="resource-card" href="https://youtube.com/playlist?list=PLUl4u3cNGP60YyhMjYmXuVmX562QcClSp&si=UvM_mLOEkyylQ1O4" target="_blank" rel="noopener" data-type="course">
+        <div class="rc-type"><i class="fa-solid fa-graduation-cap"></i> Course</div>
+        <div class="rc-title">MIT 15.773 Hands-On Deep Learning Spring 2024</div>
+        <div class="rc-desc">Intuitive non-math lectures on DL to Gen AI by Prof. Rama Ramakrishnan.</div>
+        <div class="rc-tags"><span class="tag">DL</span><span class="tag">Gen AI</span><span class="tag">LLM</span><span class="tag">Visual</span></div>
+      </a>
+
+      <a class="resource-card" href="https://distill.pub/" target="_blank" rel="noopener" data-type="blog">
+        <div class="rc-type"><i class="fa-solid fa-rss"></i> Blog</div>
+        <div class="rc-title">Distill.pub</div>
+        <div class="rc-desc">Interactive, peer-reviewed ML articles. Clarity over brevity.</div>
+        <div class="rc-tags"><span class="tag">Read</span><span class="tag">GNN</span><span class="tag">RNN</span></div>
+      </a>
+
+      <a class="resource-card" href="https://islp.readthedocs.io/en/latest/labs.html" target="_blank" rel="noopener" data-type="book">
+        <div class="rc-type"><i class="fa-solid fa-book-open"></i> Book</div>
+        <div class="rc-title">An Introduction to Statistical Learning</div>
+        <div class="rc-desc">James, Witten et al. R &amp; Python labs. The practical companion to ESL.</div>
+        <div class="rc-tags"><span class="tag">Hands-on</span><span class="tag">DL</span></div>
+      </a>
+
+      <a class="resource-card" href="https://www.deeplearningbook.org/" target="_blank" rel="noopener" data-type="book">
+        <div class="rc-type"><i class="fa-solid fa-book-open"></i> Book</div>
+        <div class="rc-title">The Deep Learning Book</div>
+        <div class="rc-desc">Goodfellow, Bengio &amp; Courville — the canonical reference for neural network theory. Not for beginners.</div>
+        <div class="rc-tags"><span class="tag">DL</span><span class="tag">Math</span><span class="tag">NN</span></div>
+      </a>
+
+      <a class="resource-card" href="https://youtube.com/playlist?list=PLAqhIrjkxbuWI23v9cThsA9GvCAUhRvKZ&si=-QcE6UsDjqN49N1n" target="_blank" rel="noopener" data-type="video">
+        <div class="rc-type"><i class="fa-solid fa-video"></i> Video</div>
+        <div class="rc-title">Zero to Hero: Andrej Karpathy</div>
+        <div class="rc-desc">Eminent YT series by Andrej Karpathy on building neural networks from scratch.</div>
+        <div class="rc-tags"><span class="tag">NN</span><span class="tag">Math</span><span class="tag">LLM</span><span class="tag">Gen AI</span></div>
+      </a>
+
+      <a class="resource-card" href="https://youtube.com/playlist?list=PLZ2ps__7DhBZVxMrSkTIcG6zZBDKUXCnM&si=1l-hQ9HFBeXE4x19" target="_blank" rel="noopener" data-type="video">
+        <div class="rc-type"><i class="fa-solid fa-video"></i> Video</div>
+        <div class="rc-title">IITM: BS Data Science Lectures</div>
+        <div class="rc-desc">Mitesh Khapra's series on Deep Learning from scratch.</div>
+        <div class="rc-tags"><span class="tag">DL</span><span class="tag">Math</span><span class="tag">NN</span></div>
+      </a>
+
+      <a class="resource-card" href="https://colah.github.io/posts/2015-08-Understanding-LSTMs/" target="_blank" rel="noopener" data-type="blog">
+        <div class="rc-type"><i class="fa-solid fa-rss"></i> Blog</div>
+        <div class="rc-title">Understanding LSTM Networks</div>
+        <div class="rc-desc">Chris Olah's blog post on LSTMs.</div>
+        <div class="rc-tags"><span class="tag">Read</span><span class="tag">NN</span></div>
+      </a>
+
+      <a class="resource-card" href="https://colah.github.io/posts/2014-07-Conv-Nets-Modular/" target="_blank" rel="noopener" data-type="blog">
+        <div class="rc-type"><i class="fa-solid fa-rss"></i> Blog</div>
+        <div class="rc-title">Understanding Convolutional Networks</div>
+        <div class="rc-desc">Chris Olah's blog post on convolutional networks.</div>
+        <div class="rc-tags"><span class="tag">Read</span><span class="tag">NN</span></div>
+      </a>
+
+      <a class="resource-card" href="https://colah.github.io/posts/2015-08-Backprop/" target="_blank" rel="noopener" data-type="blog">
+        <div class="rc-type"><i class="fa-solid fa-rss"></i> Blog</div>
+        <div class="rc-title">Backpropagation Explained</div>
+        <div class="rc-desc">Chris Olah's blog post on backpropagation.</div>
+        <div class="rc-tags"><span class="tag">Read</span><span class="tag">Math</span><span class="tag">NN</span></div>
+      </a>
+
+      <a class="resource-card" href="https://youtube.com/playlist?list=PLJ0WcPQS7xJVJr6ceIPFSkAGAgrkmw1c9&si=5RxVP6_Mxx8b-4nP" target="_blank" rel="noopener" data-type="video">
+        <div class="rc-type"><i class="fa-solid fa-video"></i> Video</div>
+        <div class="rc-title">AlphaFold from scratch series</div>
+        <div class="rc-desc">This series involves Pytorch and Evoformer.</div>
+        <div class="rc-tags"><span class="tag">Bio</span><span class="tag">DL</span><span class="tag">NN</span></div>
+      </a>
+
+      <a class="resource-card" href="https://youtu.be/0jWOZoTsYzI?si=LiIEaaJwPH2U9LGI" target="_blank" rel="noopener" data-type="video">
+        <div class="rc-type"><i class="fa-solid fa-video"></i> Video</div>
+        <div class="rc-title">Lecture of DL in Life Sciences</div>
+        <div class="rc-desc">Manolis Kellis of MIT talks online in 2021.</div>
+        <div class="rc-tags"><span class="tag">Bio</span><span class="tag">DL</span><span class="tag">NN</span></div>
+      </a>
+
+      <a class="resource-card" href="https://antaripasaha.notion.site/Data-Science-All-in-one-f7b861fc69dd49439231b8c14a0e330b" target="_blank" rel="noopener" data-type="blog">
+        <div class="rc-type"><i class="fa-solid fa-rss"></i> Blog</div>
+        <div class="rc-title">DS Roadmap</div>
+        <div class="rc-desc">Antaripa Saha's Notion Guide</div>
+        <div class="rc-tags"><span class="tag">Read</span><span class="tag">DL</span><span class="tag">Math</span></div>
+      </a>
+
+      <a class="resource-card" href="https://www.iamtk.co/ai-ml-for-biology-and-healthcare-a-learning-path" target="_blank" rel="noopener" data-type="blog">
+        <div class="rc-type"><i class="fa-solid fa-rss"></i> Blog</div>
+        <div class="rc-title">AI/ML for Biology and Healthcare</div>
+        <div class="rc-desc">The legend TK Kinoshita strives consistency in his learning path.</div>
+        <div class="rc-tags"><span class="tag">Bio</span><span class="tag">DL</span><span class="tag">NN</span></div>
+      </a>
+
+    </div><!-- /resource-grid -->
+
+
+    <!-- ═══════════ SECTION 2 · NOTION ═══════════ -->
+    <div class="section-label">
+      <span class="dot dot-notion"></span>
+      Notion Space
     </div>
 
-    <div class="phil-card">
-      <div class="pc-meta"><i class="fa-solid fa-book"></i> Book</div>
-      <div class="pc-title">Reasons and Persons</div>
-      <div class="pc-author">Derek Parfit · 1984</div>
-      <blockquote>We are not the separately existing beings that we thought we were.</blockquote>
-      <span class="pc-status">📚 To Read</span>
+    <div class="notion-portal">
+      <div class="np-left">
+        <div class="np-badge"><i class="fa-solid fa-cube"></i> &nbsp;Personal Knowledge Base</div>
+        <h3>The Second Brain</h3>
+        <p>Reading logs, project trackers for documenting my projects and important concepts.</p>
+
+        <div class="notion-pages">
+          <a class="notion-chip" href="https://www.notion.so/Notes-30502559d30b80b3a157e8e19ce7ead3?source=copy_link" target="_blank" rel="noopener">📓 Reading Notes</a>
+          <a class="notion-chip" href="https://www.notion.so/Monthly-Dashboard-30902559d30b8044ab9cf72cbcb3781e?source=copy_link" target="_blank" rel="noopener">🗂 Project Tracker</a>
+        </div>
+      </div>
+
+      <a class="btn-notion" href="https://www.notion.so/Notes-30502559d30b80b3a157e8e19ce7ead3?source=copy_link" target="_blank" rel="noopener">
+        <i class="fa-solid fa-arrow-up-right-from-square"></i> Open Notion
+      </a>
     </div>
 
-  </div><!-- /phil-list -->
 
-</main>
+    <!-- ═══════════ SECTION 3 · PHILOSOPHICAL READINGS ═══════════ -->
+    <div class="section-label">
+      <span class="dot dot-phil"></span>
+      Life and Beyond
+    </div>
 
-<footer>
-  <p>The Truth Is Out There · © 2026</p>
-</footer>
+    <div class="phil-list">
 
-<script src="js/main.js"></script>
-<script>
-  // ─── Filter tabs logic ───
-  const tabs = document.querySelectorAll('.filter-tab');
-  const cards = document.querySelectorAll('.resource-card[data-type]');
+      <div class="phil-card">
+        <div class="pc-meta"><i class="fa-solid fa-feather-pointed"></i> Essay</div>
+        <div class="pc-title">The Myth of Sisyphus</div>
+        <div class="pc-author">Albert Camus · 1942</div>
+        <blockquote>One must imagine Sisyphus happy.</blockquote>
+        <span class="pc-status">✓ Read</span>
+      </div>
 
-  tabs.forEach(tab => {
-    tab.addEventListener('click', () => {
-      tabs.forEach(t => t.classList.remove('active'));
-      tab.classList.add('active');
+      <div class="phil-card">
+        <div class="pc-meta"><i class="fa-solid fa-scroll"></i> Treatise</div>
+        <div class="pc-title">Meditations</div>
+        <div class="pc-author">Marcus Aurelius · 170–180 AD</div>
+        <blockquote>You have power over your mind — not outside events. Realise this, and you will find strength.</blockquote>
+        <span class="pc-status">✓ Read</span>
+      </div>
 
-      const filter = tab.dataset.filter;
-      cards.forEach(card => {
-        if (filter === 'all' || card.dataset.type === filter) {
-          card.classList.remove('hidden');
-        } else {
-          card.classList.add('hidden');
-        }
-      });
-    });
-  });
-</script>
+      <div class="phil-card">
+        <div class="pc-meta"><i class="fa-solid fa-book"></i> Book</div>
+        <div class="pc-title">Being and Time</div>
+        <div class="pc-author">Martin Heidegger · 1927</div>
+        <blockquote>Dasein is always already thrown into a world it did not choose.</blockquote>
+        <span class="pc-status">📖 Reading</span>
+      </div>
 
+      <div class="phil-card">
+        <div class="pc-meta"><i class="fa-solid fa-book"></i> Book</div>
+        <div class="pc-title">Reasons and Persons</div>
+        <div class="pc-author">Derek Parfit · 1984</div>
+        <blockquote>We are not the separately existing beings that we thought we were.</blockquote>
+        <span class="pc-status">📚 To Read</span>
+      </div>
+
+    </div><!-- /phil-list -->
+
+  </main>
+
+  <div data-include="partials/footer.html"></div>
+
+  <script src="js/main.js"></script>
+  <script src="js/include.js"></script>
+  <script src="js/pages/blogs.js"></script>
 </body>
 </html>

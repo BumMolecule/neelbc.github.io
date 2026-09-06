@@ -1,0 +1,210 @@
+/* =========================================================
+   layout.css — header, nav, main, footer
+   ========================================================= */
+
+/* HEADER */
+header {
+  position: relative;
+  background: var(--navy);
+  text-align: center;
+  padding: 80px 20px 40px;
+  border-bottom: 1px solid var(--border);
+  overflow: hidden;
+}
+
+/*
+   Bengali motif layers:
+   ::before — Nakshi Kantha running-stitch pattern (the quilted spirals and dashes)
+   ::after  — Alpona corner accents (rice-plant curves, fish, conch shell outlines)
+*/
+
+header::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  /* Nakshi Kantha running-stitch spirals + dashes — cranked up for visibility */
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140' viewBox='0 0 140 140'%3E%3Cg fill='none' stroke='%2358a6ff' stroke-width='1.2' opacity='0.35' stroke-dasharray='5 3'%3E%3Cpath d='M70 70c0-8 6-14 14-14s14 6 14 14-6 14-14 14c-12 0-22-10-22-22s10-22 22-22c16 0 30 14 30 30'/%3E%3Cline x1='10' y1='20' x2='130' y2='20'/%3E%3Cline x1='10' y1='120' x2='130' y2='120'/%3E%3Cline x1='20' y1='10' x2='20' y2='130'/%3E%3Cline x1='120' y1='10' x2='120' y2='130'/%3E%3Cpath d='M25 90c10-8 20-4 20 6s-10 14-20 6' stroke-dasharray='3 2'/%3E%3Cpath d='M95 35c10-8 20-4 20 6s-10 14-20 6' stroke-dasharray='3 2'/%3E%3Cellipse cx='12' cy='12' rx='4' ry='2' transform='rotate(45 12 12)'/%3E%3Cellipse cx='128' cy='12' rx='4' ry='2' transform='rotate(-45 128 12)'/%3E%3Cellipse cx='12' cy='128' rx='4' ry='2' transform='rotate(-45 12 128)'/%3E%3Cellipse cx='128' cy='128' rx='4' ry='2' transform='rotate(45 128 128)'/%3E%3C/g%3E%3C/svg%3E");
+  background-size: 140px 140px;
+  animation: motifDrift 50s linear infinite;
+  opacity: 1;
+}
+
+/* Alpona corner accents — Bengali floor-art motifs: fish (machh), conch (shankha), rice plant (dhan) */
+header::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    /* Top-right: fish + rice plant */
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='180' viewBox='0 0 220 180'%3E%3Cg fill='none' stroke='%23a371f7' stroke-width='1.2' opacity='0.30'%3E%3C!-- Machh (fish) --%3E%3Cpath d='M130 50c20-15 45-15 55 0s-15 25-35 20' stroke-dasharray='5 3'/%3E%3Cpath d='M130 50c20 15 45 15 55 0' stroke-dasharray='5 3'/%3E%3Ccircle cx='170' cy='47' r='2'/%3E%3Cpath d='M185 50l10-8v16z'/%3E%3C!-- Dhan (rice plant stem) --%3E%3Cpath d='M50 160c0-40 5-80 15-120' stroke-dasharray='3 4'/%3E%3Cellipse cx='58' cy='55' rx='6' ry='2.5' transform='rotate(-20 58 55)'/%3E%3Cellipse cx='55' cy='75' rx='6' ry='2.5' transform='rotate(15 55 75)'/%3E%3Cellipse cx='60' cy='95' rx='6' ry='2.5' transform='rotate(-10 60 95)'/%3E%3Cellipse cx='56' cy='115' rx='5' ry='2' transform='rotate(20 56 115)'/%3E%3Cellipse cx='62' cy='135' rx='5' ry='2' transform='rotate(-15 62 135)'/%3E%3C!-- Shankha (conch) outline --%3E%3Cpath d='M160 120c-5-10 0-25 10-28s18 5 15 18c-2 8-10 15-18 14' stroke-dasharray='4 2'/%3E%3Cpath d='M162 115c3-5 8-6 10-2' stroke-dasharray='2 2'/%3E%3Cpath d='M165 110c2-3 5-4 7-1' stroke-dasharray='2 2'/%3E%3C!-- Alpona dots border --%3E%3Ccircle cx='20' cy='15' r='1.5'/%3E%3Ccircle cx='35' cy='10' r='1'/%3E%3Ccircle cx='50' cy='8' r='1.5'/%3E%3Ccircle cx='65' cy='10' r='1'/%3E%3Ccircle cx='80' cy='15' r='1.5'/%3E%3C/g%3E%3C/svg%3E"),
+    /* Bottom-left: mirrored fish + spiral */
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='160' viewBox='0 0 200 160'%3E%3Cg fill='none' stroke='%23a371f7' stroke-width='1.2' opacity='0.25'%3E%3C!-- Mirrored machh --%3E%3Cpath d='M80 100c-20 15-45 15-55 0s15-25 35-20' stroke-dasharray='5 3'/%3E%3Cpath d='M80 100c-20-15-45-15-55 0' stroke-dasharray='5 3'/%3E%3Ccircle cx='40' cy='97' r='2'/%3E%3Cpath d='M25 100l-10 8v-16z'/%3E%3C!-- Alpona spiral (floor art) --%3E%3Cpath d='M140 30c0 10-8 18-18 18s-18-8-18-18 8-18 18-18c14 0 26 12 26 26' stroke-dasharray='3 3'/%3E%3C!-- Rice grains scattered --%3E%3Cellipse cx='160' cy='80' rx='4' ry='1.8' transform='rotate(30 160 80)'/%3E%3Cellipse cx='170' cy='95' rx='4' ry='1.8' transform='rotate(-20 170 95)'/%3E%3Cellipse cx='155' cy='110' rx='3.5' ry='1.5' transform='rotate(40 155 110)'/%3E%3C/g%3E%3C/svg%3E");
+  background-size: 220px 180px, 200px 160px;
+  background-position: top right, bottom left;
+  background-repeat: no-repeat;
+}
+
+body.light header {
+  background: linear-gradient(120deg, #fffaf0, #f5efe4, #fffaf0);
+  background-size: 300% 300%;
+  animation: softShift 18s ease infinite;
+}
+/* Light mode: warm gold kantha stitches */
+body.light header::before {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140' viewBox='0 0 140 140'%3E%3Cg fill='none' stroke='%23a8770a' stroke-width='1.2' opacity='0.25' stroke-dasharray='5 3'%3E%3Cpath d='M70 70c0-8 6-14 14-14s14 6 14 14-6 14-14 14c-12 0-22-10-22-22s10-22 22-22c16 0 30 14 30 30'/%3E%3Cline x1='10' y1='20' x2='130' y2='20'/%3E%3Cline x1='10' y1='120' x2='130' y2='120'/%3E%3Cline x1='20' y1='10' x2='20' y2='130'/%3E%3Cline x1='120' y1='10' x2='120' y2='130'/%3E%3Cpath d='M25 90c10-8 20-4 20 6s-10 14-20 6' stroke-dasharray='3 2'/%3E%3Cpath d='M95 35c10-8 20-4 20 6s-10 14-20 6' stroke-dasharray='3 2'/%3E%3Cellipse cx='12' cy='12' rx='3' ry='1.5' transform='rotate(45 12 12)'/%3E%3Cellipse cx='128' cy='12' rx='3' ry='1.5' transform='rotate(-45 128 12)'/%3E%3Cellipse cx='12' cy='128' rx='3' ry='1.5' transform='rotate(-45 12 128)'/%3E%3Cellipse cx='128' cy='128' rx='3' ry='1.5' transform='rotate(45 128 128)'/%3E%3C/g%3E%3C/svg%3E");
+}
+body.light header::after {
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='180' viewBox='0 0 220 180'%3E%3Cg fill='none' stroke='%237d5f1f' stroke-width='1.2' opacity='0.22'%3E%3Cpath d='M130 50c20-15 45-15 55 0s-15 25-35 20' stroke-dasharray='5 3'/%3E%3Cpath d='M130 50c20 15 45 15 55 0' stroke-dasharray='5 3'/%3E%3Ccircle cx='170' cy='47' r='2'/%3E%3Cpath d='M185 50l10-8v16z'/%3E%3Cpath d='M50 160c0-40 5-80 15-120' stroke-dasharray='3 4'/%3E%3Cellipse cx='58' cy='55' rx='6' ry='2.5' transform='rotate(-20 58 55)'/%3E%3Cellipse cx='55' cy='75' rx='6' ry='2.5' transform='rotate(15 55 75)'/%3E%3Cellipse cx='60' cy='95' rx='6' ry='2.5' transform='rotate(-10 60 95)'/%3E%3Cellipse cx='56' cy='115' rx='5' ry='2' transform='rotate(20 56 115)'/%3E%3Cellipse cx='62' cy='135' rx='5' ry='2' transform='rotate(-15 62 135)'/%3E%3Cpath d='M160 120c-5-10 0-25 10-28s18 5 15 18c-2 8-10 15-18 14' stroke-dasharray='4 2'/%3E%3Cpath d='M162 115c3-5 8-6 10-2' stroke-dasharray='2 2'/%3E%3Cpath d='M165 110c2-3 5-4 7-1' stroke-dasharray='2 2'/%3E%3Ccircle cx='20' cy='15' r='1.5'/%3E%3Ccircle cx='35' cy='10' r='1'/%3E%3Ccircle cx='50' cy='8' r='1.5'/%3E%3Ccircle cx='65' cy='10' r='1'/%3E%3Ccircle cx='80' cy='15' r='1.5'/%3E%3C/g%3E%3C/svg%3E"),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='160' viewBox='0 0 200 160'%3E%3Cg fill='none' stroke='%237d5f1f' stroke-width='1.2' opacity='0.18'%3E%3Cpath d='M80 100c-20 15-45 15-55 0s15-25 35-20' stroke-dasharray='5 3'/%3E%3Cpath d='M80 100c-20-15-45-15-55 0' stroke-dasharray='5 3'/%3E%3Ccircle cx='40' cy='97' r='2'/%3E%3Cpath d='M25 100l-10 8v-16z'/%3E%3Cpath d='M140 30c0 10-8 18-18 18s-18-8-18-18 8-18 18-18c14 0 26 12 26 26' stroke-dasharray='3 3'/%3E%3Cellipse cx='160' cy='80' rx='4' ry='1.8' transform='rotate(30 160 80)'/%3E%3Cellipse cx='170' cy='95' rx='4' ry='1.8' transform='rotate(-20 170 95)'/%3E%3Cellipse cx='155' cy='110' rx='3.5' ry='1.5' transform='rotate(40 155 110)'/%3E%3C/g%3E%3C/svg%3E");
+}
+
+@keyframes motifDrift {
+  0%   { background-position: 0 0; }
+  100% { background-position: 280px 140px; }
+}
+
+header h1 {
+  position: relative;
+  font-size: 3rem;
+  margin: 0 0 10px;
+  color: var(--text);
+}
+
+/* MONOGRAM — neon glow on hover */
+.monogram {
+  position: absolute;
+  top: 20px;
+  left: 30px;
+  width: 40px;
+  height: 40px;
+  color: var(--accent);
+  opacity: 0.85;
+  transition: opacity 0.3s ease, transform 0.3s ease, filter 0.3s ease;
+  filter: drop-shadow(0 0 0px transparent);
+}
+.monogram svg { display: block; width: 100%; height: 100%; }
+.monogram:hover {
+  opacity: 1;
+  transform: rotate(-4deg) scale(1.08);
+  filter: drop-shadow(0 0 6px var(--accent)) drop-shadow(0 0 14px var(--accent));
+  animation: neonPulse 1.5s ease-in-out infinite;
+}
+
+@keyframes neonPulse {
+  0%, 100% { filter: drop-shadow(0 0 4px var(--accent)) drop-shadow(0 0 10px var(--accent)); }
+  50%      { filter: drop-shadow(0 0 8px var(--accent)) drop-shadow(0 0 20px var(--accent)) drop-shadow(0 0 30px var(--accent)); }
+}
+
+/* NAV — decorative diamond separators + gradient underline */
+nav {
+  position: relative;
+  background: var(--navy);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+  padding: 15px 0;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+
+/* Animated gradient stripe along nav bottom */
+nav::after {
+  content: "";
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent 0%, var(--accent) 30%, #a371f7 50%, #f85149 70%, transparent 100%);
+  background-size: 200% 100%;
+  animation: navShimmer 6s linear infinite;
+  opacity: 0.5;
+}
+body.light nav::after { opacity: 0.35; }
+
+@keyframes navShimmer {
+  0%   { background-position: 100% 0; }
+  100% { background-position: -100% 0; }
+}
+
+/* Rice-grain separators between nav links (dhan motif) */
+nav a + a::before {
+  content: "❋";
+  position: absolute;
+  left: -20px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 0.4rem;
+  color: var(--border);
+  pointer-events: none;
+  opacity: 0.7;
+}
+
+nav a {
+  color: var(--muted);
+  text-decoration: none;
+  position: relative;
+  transition: color var(--transition);
+  letter-spacing: 0.03em;
+}
+
+nav a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -5px;
+  width: 0;
+  height: 2px;
+  background: var(--accent);
+  transition: width 0.3s ease;
+}
+
+nav a:hover,
+nav a.active {
+  color: var(--text);
+}
+nav a:hover::after,
+nav a.active::after {
+  width: 100%;
+}
+
+/* MAIN */
+main {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 60px 20px;
+}
+
+/* FOOTER */
+footer {
+  position: relative;
+  text-align: center;
+  padding: 40px 20px;
+  color: var(--muted);
+}
+
+footer::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 10px;
+  width: 200px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #f5c518, transparent);
+  transform: translateX(-50%);
+  animation: glow 3s infinite ease-in-out;
+}
+
+@keyframes glow {
+  0%, 100% { opacity: 0.2; }
+  50%      { opacity: 1; }
+}
+
+@keyframes softShift {
+  0%, 100% { background-position: 0% 50%; }
+  50%      { background-position: 100% 50%; }
+}
