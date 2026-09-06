@@ -1,6 +1,6 @@
 # neelbc.github.io
 
-Personal site of Neeloy Bhattacharya — live at **https://neelbc.github.io**.
+Personal site of Neeloy Bhattacharya — live at **[https://bummolecule.github.io/neelbc.github.io/](https://bummolecule.github.io/neelbc.github.io/)**.
 
 ## Structure
 
